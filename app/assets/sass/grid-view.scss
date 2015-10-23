@@ -1,0 +1,40 @@
+// Imports
+@import '../../../vendor/sass-mq/mq';
+@import '../../../vendor/frontend/app/assets/sass/variables/_standard.scss';
+//@import '../../../vendor/hiof-layout/dist/layout';
+//@import '../../../vendor/hiof-typography/dist/typography';
+// -----------------------------------------------------------
+// -----------------------------------------------------------
+// Output
+
+.grid{
+  @import '../../../vendor/hiof-layout/dist/layout';
+  @import '../../../vendor/hiof-typography/dist/typography';
+}
+
+.grid-item {
+    h1 {
+        min-height: 70px;
+        min-height: 7rem;
+        font-size: 1.6rem;
+        display: block;
+    }
+    a{
+      display: block;
+      color: #0f7ab6;
+    }
+    background: #eee;
+    border: .1rem solid #eee;
+    &:hover{
+      background: #fff;
+    }
+}
+
+@include mq($until: small) {}
+
+@include mq($from: small, $until: large) {}
+
+@include mq($from: large) {}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dppx) {}
