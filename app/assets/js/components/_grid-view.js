@@ -7,39 +7,33 @@
 
     gridAppendData = function(data, settings) {
 
-        var lang = Hiof.options.language.toString();
-        var i18n = Hiof.options.i18n;
+        const lang = Hiof.options.language.toString();
+        const i18n = Hiof.options.i18n;
         //var data = semesterStartLoadData(options);
         //debug('From itservicesAppendData:');
         //debug(lang);
         //debug(i18n.en.itservices.readmore);
         data.meta = settings;
 
-
-
-
         //debug(data);
-        var templateSource, markup;
-
-
+        let templateSource, markup;
 
             templateSource = Hiof.Templates['grid/show'];
-
             markup = templateSource(data);
 
 
         $('#grid').html(markup);
-        var scrollDestEl = "#content";
+        let scrollDestEl = "#content";
         Hiof.scrollToElement(scrollDestEl);
     };
 
 
     gridLoadData = function(options) {
-        var pageTreeID = $('#grid').attr('data-page-tree-id');
+        const pageTreeID = $('#grid').attr('data-page-tree-id');
 
 //24236
         // Setup the query
-        var settings = $.extend({
+        let settings = $.extend({
             id: pageTreeID,
             url: 'http://hiof.no/api/v1/page-relationship/',
             server: 'www2'
@@ -47,7 +41,7 @@
         //debug(settings);
 
 
-        var contentType = "application/x-www-form-urlencoded; charset=utf-8";
+        let contentType = "application/x-www-form-urlencoded; charset=utf-8";
         if (window.XDomainRequest) { //for IE8,IE9
             contentType = "text/plain";
         }
@@ -84,12 +78,10 @@
     Path.map("#/informasjon/").to(function() {
         gridLoadData();
     });
-
     initatePathgrid = function() {
         // Load root path if no path is active
         Path.root("#/informasjon");
     };
-
 
     // Run functions on load
     $(function() {
