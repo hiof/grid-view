@@ -1,0 +1,80 @@
+// Imports
+@import '../../../vendor/sass-mq/mq';
+@import '../../../vendor/frontend/app/assets/sass/variables/_standard.scss';
+//@import '../../../vendor/hiof-layout/dist/layout';
+//@import '../../../vendor/hiof-typography/dist/typography';
+// -----------------------------------------------------------
+// -----------------------------------------------------------
+// Output
+
+.grid{
+  @import '../../../vendor/hiof-layout/dist/layout';
+  @import '../../../vendor/hiof-typography/dist/typography';
+}
+
+.grid-item {
+  h1 {
+    min-height: 90px;
+    min-height: 9rem;
+    font-size: 1.6rem;
+    display: block;
+  }
+  a{
+    display: block;
+    color: $color-primary-action;
+    border-bottom: none !important;
+    border: 1px solid $color-primary-action !important;
+    border: .1rem solid $color-primary-action !important;
+    border-radius: 4px;
+    border-radius: .4rem;
+    padding: .5rem 1rem;
+    transition: border-color .3s;
+    &:hover, &:focus{
+      background: $color-primary-action;
+      color: #fff;
+      //border-bottom: none !important;
+      border-color: #eee;
+    }
+  }
+  padding:0 !important;
+  //background: #eee;
+  //&:hover, &:focus{
+  //  border-color: #337ab7;
+  //}
+}
+.list-view-buttons{
+  li{
+    list-style: none;
+    display: inline;
+    margin: 0;
+    margin-right: 1rem;
+    a{
+      display: inline-block;
+      color: $color-primary-action;
+      //border-bottom: none !important;
+      border: 1px solid $color-primary-action !important;
+      border: .1rem solid $color-primary-action !important;
+      border-radius: 4px;
+      border-radius: .4rem;
+      padding: .5rem 1rem;
+      transition: border-color .3s;
+      transition: color .3s;
+      transition: background .3s;
+      margin-bottom: 1rem;
+      &:hover, &:focus{
+        background: $color-primary-action;
+        color: #fff;
+        //border-bottom: none !important;
+        border-color: $color-primary-action !important;
+      }
+    }
+  }
+}
+@include mq($until: small) {}
+
+@include mq($from: small, $until: large) {}
+
+@include mq($from: large) {}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dppx) {}
