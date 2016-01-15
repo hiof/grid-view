@@ -2,7 +2,11 @@
 <div class="grid">
 {{#each children}}
   <div class="lo-one-third grid-item">
-    <a href="/index.php?ID={{id}}"><h1>{{pagetitle}}</h1></a>
+    {{#if link}}
+      <a href="{{link}}" title="{{link_title}}"><h1>{{link_title}}</h1></a>
+    {{else}}
+      <a href="/index.php?ID={{id}}" title="{{pagetitle}}"><h1>{{pagetitle}}</h1></a>
+    {{/if}}
   </div>
 
 {{/each}}

@@ -27,9 +27,14 @@ module.exports = function(grunt) {
       options: {
 
       },
-      dist: {
+      www: {
         files: {
-          'build/grid-view.css': 'app/assets/sass/grid-view.scss'
+          'build/grid-view.css': 'app/assets/sass/www-grid-view.scss'
+        }
+      },
+      www2: {
+        files: {
+          'build/grid-view.css': 'app/assets/sass/www2-grid-view.scss'
         }
       }
     },
@@ -289,16 +294,20 @@ module.exports = function(grunt) {
 });
 
 grunt.registerTask('subtaskJs', ['eslint','handlebars', 'babel', 'concat:scripts', 'uglify']);
-grunt.registerTask('subtaskCss', ['sass', 'autoprefixer', 'cssmin']);
+grunt.registerTask('subtaskCss', ['sass:www', 'autoprefixer', 'cssmin']);
+grunt.registerTask('subtaskCss2', ['sass:www2', 'autoprefixer', 'cssmin']);
+
 
 grunt.registerTask('build', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss', 'versioning:build']);
+grunt.registerTask('build', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss2', 'versioning:build']);
 grunt.registerTask('deploy', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss', 'versioning:deploy', 'copy:dist']);
+grunt.registerTask('deploy2', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss2', 'versioning:deploy', 'copy:dist']);
 
 
 
 grunt.registerTask('deploy-staging', ['deploy', 'sftp:stage']);
 grunt.registerTask('deploy-prod', ['deploy', 'sftp:prod']);
-grunt.registerTask('deploy-staging2', ['deploy', 'sftp:stage2']);
-grunt.registerTask('deploy-prod2', ['deploy', 'sftp:prod2']);
+grunt.registerTask('deploy-staging2', ['deploy2', 'sftp:stage2']);
+grunt.registerTask('deploy-prod2', ['deploy2', 'sftp:prod2']);
 
 };
