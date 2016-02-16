@@ -38,18 +38,18 @@
 
     //24236
     // Setup the query
-    let settings = $.extend({
+    let defaults = {
       id: pageTreeID,
       url: 'http://hiof.no/api/v2/page-relationship/',
       server: 'www2',
       visible: 'on'
-    }, options);
+    };
 
-    //let settings = Object.assign(
-    //  {},
-    //  defaults,
-    //  options
-    //);
+    let settings = Object.assign(
+      {},
+      defaults,
+      options
+    );
 
     let contentType = "application/x-www-form-urlencoded; charset=utf-8";
     if (window.XDomainRequest) { //for IE8,IE9
@@ -83,9 +83,16 @@
 
   // Routing
   Path.map("#/informasjon").to(function() {
+    const url = $('#grid').attr('data-url');
+
     let options ={
       server:  $('#grid').attr('data-server')
     }
+    if(!typeof url === 'undefined'){
+      options.url = url;
+    }
+
+
     gridLoadData(options);
   });
   Path.map("#/informasjon/").to(function() {
