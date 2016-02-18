@@ -65,6 +65,20 @@ module.exports = function(grunt) {
       }
     },
     copy: {
+      data: {
+        expand: true,
+        cwd: 'app/assets/js/data/',
+        src: '**/*',
+        dest: 'build',
+        filter: 'isFile'
+      },
+      images: {
+        expand: true,
+        cwd: 'app/assets/images/',
+        src: '**/*',
+        dest: 'build',
+        filter: 'isFile'
+      },
       dist: {
         expand: true,
         cwd: 'build/',
@@ -172,6 +186,17 @@ module.exports = function(grunt) {
           dest: '',
           type: 'css',
           ext: '.min.css'
+        },
+
+        {
+          assets: [{
+            src: 'build/studenthandbok-illustrations.js',
+            dest: 'build/studenthandbok-illustrations.js'
+          }],
+          key: 'assets',
+          dest: '',
+          type: 'js',
+          ext: '.min.js'
         }]
       },
       deploy: {
@@ -199,6 +224,17 @@ module.exports = function(grunt) {
           dest: '',
           type: 'css',
           ext: '.min.css'
+        },
+
+        {
+          assets: [{
+            src: 'build/studenthandbok-illustrations.js',
+            dest: 'build/studenthandbok-illustrations.js'
+          }],
+          key: 'assets',
+          dest: '',
+          type: 'js',
+          ext: '.min.js'
         }
       ]
     }
@@ -298,10 +334,10 @@ grunt.registerTask('subtaskCss', ['sass:www', 'autoprefixer', 'cssmin']);
 grunt.registerTask('subtaskCss2', ['sass:www2', 'autoprefixer', 'cssmin']);
 
 
-grunt.registerTask('build', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss', 'versioning:build']);
-grunt.registerTask('build', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss2', 'versioning:build']);
-grunt.registerTask('deploy', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss', 'versioning:deploy', 'copy:dist']);
-grunt.registerTask('deploy2', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss2', 'versioning:deploy', 'copy:dist']);
+grunt.registerTask('build', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss', 'copy:data', 'copy:images', 'versioning:build']);
+grunt.registerTask('build2', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss2', 'copy:data', 'copy:images', 'versioning:build']);
+grunt.registerTask('deploy', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss', 'copy:data', 'copy:images', 'versioning:deploy',  'copy:dist']);
+grunt.registerTask('deploy2', ['clean:build', 'clean:dist', 'subtaskJs', 'subtaskCss2', 'copy:data', 'copy:images', 'versioning:deploy', 'copy:dist']);
 
 
 
