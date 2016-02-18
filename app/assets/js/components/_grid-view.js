@@ -1,21 +1,11 @@
 (function(Hiof, undefined) {
 
-  // Functions
-  //gridAppendData = function(data, settings) {
-  //
-  //};
-
   gridAppendData = function(data, settings) {
-
     const lang = Hiof.options.language.toString();
     const i18n = Hiof.options.i18n;
-    //var data = semesterStartLoadData(options);
-    //debug('From itservicesAppendData:');
-    //debug(lang);
-    //debug(i18n.en.itservices.readmore);
+
     data.meta = settings;
 
-    //debug(data);
     let templateSource, markup;
 
     templateSource = Hiof.Templates['grid/show'];
@@ -36,20 +26,19 @@
   gridLoadData = function(options = {}) {
     const pageTreeID = $('#grid').attr('data-page-tree-id');
 
-    //24236
     // Setup the query
-    let settings = $.extend({
+    let defaults = {
       id: pageTreeID,
       url: 'http://hiof.no/api/v2/page-relationship/',
       server: 'www2',
       visible: 'on'
-    }, options);
+    };
 
-    //let settings = Object.assign(
-    //  {},
-    //  defaults,
-    //  options
-    //);
+    let settings = Object.assign(
+      {},
+      defaults,
+      options
+    );
 
     let contentType = "application/x-www-form-urlencoded; charset=utf-8";
     if (window.XDomainRequest) { //for IE8,IE9
@@ -63,14 +52,19 @@
       data: settings,
       contentType: contentType,
       success: function(data) {
-        //alert("Data from Server: "+JSON.stringify(data));
-        debug('Settings from success');
-        debug(settings);
-        debug('Data from success');
-        debug(data);
-        //return data;
+        if (Hiof.illustrations) {
+          $.each(data.children, function(i){
+            if (i < Hiof.illustrations.length) {
+              data.children[i].image = Hiof.illustrations[i].image;
+            }
+          });
+          // Hack to remove "nyttige linker" from the view
+          data.children.splice(7,1);
+
+        }
+
         gridAppendData(data, settings);
-        //Hiof.articleDisplayView(data, settings);
+
       },
       error: function(jqXHR, textStatus, errorThrown) {
         //alert("You can not send Cross Domain AJAX requests: " + errorThrown);
@@ -83,14 +77,26 @@
 
   // Routing
   Path.map("#/informasjon").to(function() {
-    let options ={
-      server:  $('#grid').attr('data-server')
+    const url = $('#grid').attr('data-url');
+    const server = $('#grid').attr('data-server');
+    let options = {};
+    if(typeof server != 'undefined'){
+      options.server = server;
+    }
+    if(typeof url != 'undefined'){
+      options.url = url;
     }
     gridLoadData(options);
   });
   Path.map("#/informasjon/").to(function() {
-    let options ={
-      server:  $('#grid').attr('data-server')
+    const url = $('#grid').attr('data-url');
+    const server = $('#grid').attr('data-server');
+    let options = {};
+    if(typeof server != 'undefined'){
+      options.server = server;
+    }
+    if(typeof url != 'undefined'){
+      options.url = url;
     }
     gridLoadData(options);
   });
@@ -101,32 +107,11 @@
 
   // Run functions on load
   $(function() {
-    //console.log("JS loaded");
     if ($('#grid').length) {
-
       initatePathgrid();
       Path.listen();
-
     }
-    $('.collapse').collapse();
-    //$(document).on('click', '#grid a', function(e) {
-    //    $(this).toggleClass('open');
-    //    //e.preventDefault();
-    //    //var url = $(this).attr('href');
-    //    //if (url.substring(0, 2) == "#/") {
-    //    //    //debug('String starts with #/');
-    //    //} else if (url.substring(0, 1) == "#") {
-    //    //    hash = url + "";
-    //    //    e.preventDefault();
-    //    //    setTimeout(function() {
-    //    //        scrollToElement(hash);
-    //    //    }, 200);
-    //    //
-    //    //}
-    //});
-
-
   });
-  // Expose functions to the window
+
 
 })(window.Hiof = window.Hiof || {});

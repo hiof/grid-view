@@ -1,11 +1,18 @@
-
 <div class="grid">
 {{#each children}}
   <div class="lo-one-third grid-item">
     {{#if link}}
-      <a href="{{link}}" title="{{link_title}}"><h1>{{link_title}}</h1></a>
+      <a href="{{link}}" class="grid-item-link" title="{{link_title}}">
+        {{#if image}}
+          <img class="grid-item-image" src="/assets/grid-view/illustrations/{{image}}">
+        {{/if}}
+        <h1>{{link_title}}</h1></a>
     {{else}}
-      <a href="/index.php?ID={{id}}" title="{{pagetitle}}"><h1>{{pagetitle}}</h1></a>
+      <a href="/index.php?ID={{id}}" class="grid-item-link" title="{{pagetitle}}">
+        {{#if image}}
+          <img class="grid-item-image" src="/assets/grid-view/illustrations/{{image}}">
+        {{/if}}
+        <h1>{{pagetitle}}</h1></a>
     {{/if}}
   </div>
 
