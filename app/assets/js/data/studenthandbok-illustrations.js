@@ -11,6 +11,7 @@
     {"image": 'tilrettelegging.jpg'},
     {"image": 'nyttige-linker.jpg'}
   ];
-Hiof.illustrations = illustrations;
+// Expluded illustrations until there is a better implementation of this data
+//Hiof.illustrations = illustrations;
 
 })(window.Hiof = window.Hiof || {});
