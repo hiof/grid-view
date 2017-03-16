@@ -19,7 +19,6 @@
     if (settings.server === 'www') {
       Hiof.tabindex();
     }
-
   };
 
 
@@ -29,7 +28,7 @@
     // Setup the query
     let defaults = {
       id: pageTreeID,
-      url: 'http://hiof.no/api/v2/page-relationship/',
+      url: '//www.hiof.no/api/v2/page-relationship/',
       server: 'www2',
       visible: 'on'
     };
