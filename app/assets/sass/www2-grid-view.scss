@@ -1,6 +1,9 @@
 // Imports
 @import '../../../vendor/sass-mq/mq';
-@import '../../../vendor/frontend/app/assets/sass/variables/_standard.scss';
+@import "../../../vendor/frontend/app/assets/sass/variables/_border-radius";
+@import "../../../vendor/frontend/app/assets/sass/variables/_whitespace";
+@import "../../../vendor/frontend/app/assets/sass/variables/_divider";
+@import "../../../vendor/frontend/app/assets/sass/variables/_breakpoints";
 //@import '../../../vendor/hiof-layout/dist/layout';
 //@import '../../../vendor/hiof-typography/dist/typography';
 // -----------------------------------------------------------
@@ -10,6 +13,11 @@
 .grid{
   @import '../../../vendor/hiof-layout/dist/layout';
   @import '../../../vendor/hiof-typography/dist/typography';
+  .grid-item {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .grid-item {
@@ -20,20 +28,23 @@
     border-top-right-radius: .4rem;
   }
   h1 {
-    min-height: 60px;
-    min-height: 6rem;
+    min-height: 90px;
+    min-height: 9rem;
     font-size: 1.6rem;
     display: block;
-    padding: 0 2rem;
+    padding: 0 1rem;
+    font-weight: bold;
+    margin: 10px 0;
+    margin: 1rem 0;
   }
   a{
     display: block;
     color: #0f7ab6;
+    text-decoration: underline;
   }
   background: #eee;
   border: .1rem solid #eee;
-  border-top-left-radius: .4rem;
-  border-top-right-radius: .4rem;
+  border-radius: .4rem;
   &:hover{
     background: #fff;
   }
